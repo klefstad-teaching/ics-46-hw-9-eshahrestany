@@ -134,7 +134,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 // make autograder happy
 
 bool is_adjacent(const string& s, const string& t) {
-    if (s == t) return false;
+    if (s == t) return true;
 
     int m = s.size(), n = t.size();
 
