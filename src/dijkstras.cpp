@@ -69,6 +69,7 @@ string get_arg(int argc, char *argv[], string def) {
     return def;
 }
 
+/*
 int main(int argc, char *argv[])
 {
     string filename = get_arg(argc, argv, "small.txt");
@@ -77,3 +78,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+*/
