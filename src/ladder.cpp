@@ -25,6 +25,22 @@ void print_word_ladder(const vector<string>& ladder)
         cout << word << " ";
 }
 
+void load_words(set<string> & word_list, const string& file_name)
+{
+    ifstream infile(file_name);
+    if (!infile) {
+        cerr << "unable to open file " << file_name << endl;
+        return;
+    }
+
+    string word;
+    while (infile >> word) {
+        word_list.insert(word);
+    }
+
+    infile.close();
+}
+
 // helpers
 vector<string> get_adjacent_words(const string& root, const set<string>& word_list) {
     vector<string> result;
@@ -94,9 +110,4 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     }
 
     return {};
-}
-
-int main()
-{
-    return 0;
 }
