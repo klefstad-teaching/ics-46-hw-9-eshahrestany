@@ -124,21 +124,42 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
 // make autograder happy
 
-bool is_adjacent(const string& word1, const string& word2) {
-    if (word1.size() != word2.size()) {
-        return false;
-    }
+bool is_adjacent(const string& s, const string& t) {
+    if (s == t) return false;
 
-    int diffCount = 0;
-    for (size_t i = 0; i < word1.size(); i++) {
-        if (word1[i] != word2[i]) {
-            diffCount++;
-            if (diffCount > 1) {
-                return false;
+    int m = s.size(), n = t.size();
+
+    if (abs(m - n) > 1) return false;
+
+    if (m == n) {
+        bool foundDifference = false;
+        for (int i = 0; i < m; i++) {
+            if (s[i] != t[i]) {
+                if (foundDifference)
+                    return false;
+                foundDifference = true;
             }
         }
+        return foundDifference;
+    } else {
+        const string& shorter = (m < n) ? s : t;
+        const string& longer  = (m < n) ? t : s;
+        int i = 0, j = 0;
+        bool foundDifference = false;
+
+        while (i < shorter.size() && j < longer.size()) {
+            if (shorter[i] != longer[j]) {
+                if (foundDifference)
+                    return false;
+                foundDifference = true;
+                j++;
+            } else {
+                i++;
+                j++;
+            }
+        }
+        return true;
     }
-    return diffCount == 1;
 }
 
 bool edit_distance_within(const string& str1, const string& str2, int d) {
